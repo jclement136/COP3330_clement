@@ -11,7 +11,7 @@ public class Application {
     }
 
     @Test
-    public void testDecrypt1234to0189() {
+    public void testDecrypt0189to1234() {
         Decrypter e = new Decrypter();
         assertEquals("1234", e.decrypt("0189"));
     }
