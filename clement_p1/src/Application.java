@@ -10,7 +10,13 @@ public class Application {
         assertEquals("0189", e.encrypt("1234"));
     }
 
-    /* ADDITIONAL TESTS
+    @Test
+    public void testDecrypt1234to0189() {
+        Decrypter e = new Decrypter();
+        assertEquals("1234", e.decrypt("0189"));
+    }
+
+    /* ADDITIONAL ENCRYPTER TESTS
 
     public Encrypter e = new Encrypter();
 
