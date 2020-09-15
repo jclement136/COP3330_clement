@@ -9,7 +9,6 @@ public class Encrypter {
         int modifiedArray[] = modifyIntegers(array);
         int swappedArray[] = swapIntegers(modifiedArray);
         String restrungArray = arrayToString(swappedArray);
-        System.out.println(restrungArray);
         return restrungArray;
     }
 
