@@ -1,15 +1,10 @@
-import org.junit.Test;
-
-import static junit.framework.TestCase.assertEquals;
-
 public class Encrypter {
 
     public String encrypt (String value){
-        int array[] = stringToIntArray(value);
-        int modifiedArray[] = modifyIntegers(array);
-        int swappedArray[] = swapIntegers(modifiedArray);
-        String restrungArray = arrayToString(swappedArray);
-        return restrungArray;
+        int[] array = stringToIntArray(value);
+        int[] modifiedArray = modifyIntegers(array);
+        int[] swappedArray = swapIntegers(modifiedArray);
+        return arrayToString(swappedArray);
     }
 
     public static int[] stringToIntArray(String value){
@@ -30,8 +25,7 @@ public class Encrypter {
     }
 
     public static int modify(int originalInt) {
-        int modifiedInt = (originalInt + 7) % 10;
-        return modifiedInt;
+        return (originalInt + 7) % 10;
     }
 
     public static int[] swapIntegers(int [] array) {
@@ -51,8 +45,7 @@ public class Encrypter {
     }
 
     public static String arrayToString(int [] swappedArray) {
-        String togetherAgain = "" + swappedArray[0] + swappedArray[1] + swappedArray[2] + swappedArray[3];
-        return togetherAgain;
+        return "" + swappedArray[0] + swappedArray[1] + swappedArray[2] + swappedArray[3];
     }
 
 }
