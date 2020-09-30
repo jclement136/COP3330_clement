@@ -85,7 +85,7 @@ public class App {
     }
 
     private static void displayBmiInfo(BodyMassIndex bmi) {
-        System.out.println("Your BMI score is: " + bmi.bmi_score);
+        System.out.printf("Your BMI score is: %.1f\n", bmi.bmi_score);
         System.out.println("Your BMI category is: " + bmi.bmi_category);
         System.out.println("");
     }
@@ -100,7 +100,7 @@ public class App {
 
         double average_score = total_score / size;
 
-        System.out.println("Average BMI across all inputs: " + average_score);
+        System.out.printf("Your BMI score is: %.1f\n", average_score);
     }
 
 }

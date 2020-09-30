@@ -8,11 +8,11 @@ public class BodyMassIndex {
         this.bmi_category = find_category(height, weight);
     }
 
-    private double find_score (double height, double weight) {
+    public double find_score (double height, double weight) {
         return 703 * weight / (height * height);
     }
 
-    private String find_category (double height, double weight) {
+    public String find_category (double height, double weight) {
 
         double bmi_score = find_score(height, weight);
 
