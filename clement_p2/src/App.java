@@ -49,10 +49,13 @@ public class App {
             System.out.println("Give me your height in inches.");
             response = scan.nextInt();
 
-            if (response < 0)
+            if (response < 0) {
                 System.out.println("Your height must be a positive number.");
-            else
+                scan.nextLine();
+            }
+            else {
                 keepRunning = false;
+            }
         }
 
         return response;
@@ -84,9 +87,20 @@ public class App {
     private static void displayBmiInfo(BodyMassIndex bmi) {
         System.out.println("Your BMI score is: " + bmi.bmi_score);
         System.out.println("Your BMI category is: " + bmi.bmi_category);
+        System.out.println("");
     }
 
     private static void displayBmiStatistics(ArrayList<BodyMassIndex> bmiData) {
+        int size = bmiData.size();
+        double total_score = 0;
+
+        for (int i = 0; i < size; i++) {
+            total_score += bmiData.get(i).bmi_score;
+        }
+
+        double average_score = total_score / size;
+
+        System.out.println("Average BMI across all inputs: " + average_score);
     }
 
 }
