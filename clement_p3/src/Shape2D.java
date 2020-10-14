@@ -18,6 +18,10 @@ class Square extends Shape2D{
     public double getArea(){
         return Square.area;
     }
+
+    public double getVolume(){
+        return 0;
+    }
 }
 
 class Triangle extends Shape2D{
@@ -39,6 +43,10 @@ class Triangle extends Shape2D{
     public double getArea(){
         return Triangle.area;
     }
+
+    public double getVolume(){
+        return 0;
+    }
 }
 
 class Circle extends Shape2D{
@@ -58,34 +66,8 @@ class Circle extends Shape2D{
     public double getArea(){
         return Circle.area;
     }
-}
 
-
-/*
-class Triangle extends Shape{
-
-    public double area = (Shape.length * Shape.height) / 2;
-
-    public String getName(){
-        return "triangle";
-    }
-
-    public double getArea(){
-        return area;
+    public double getVolume(){
+        return 0;
     }
 }
-
-
-class Circle extends Shape{
-
-    public double area = 0;
-
-    public String getName(){
-        return "circle";
-    }
-
-    public double getArea(){
-        return area;
-    }
-}
-*/

@@ -9,8 +9,8 @@ class Cube extends Shape3D{
 
     public Cube(double x) {
         length = x;
-        area = length * length;
-        volume = 0;
+        area = (length * length) * 6;
+        volume = length * length * length;
     }
 
     public String getName(){
@@ -19,6 +19,10 @@ class Cube extends Shape3D{
 
     public double getArea(){
         return Cube.area;
+    }
+
+    public double getVolume(){
+        return Cube.volume;
     }
 }
 
@@ -34,8 +38,13 @@ class Pyramid extends Shape3D{
         length = x;
         width = y;
         height = z;
-        area = 0;
-        volume = 0;
+
+        double value1 = length * width;
+        double value2 = length * (Math.sqrt((width / 2.00) * (width / 2.00)));
+        double value3 = width * (Math.sqrt((width / 2.00) * (width / 2.00)));
+
+        area = value1 + value2 + value3;
+        volume = ((length * width) * height) / 3.00;
     }
 
     public String getName(){
@@ -44,6 +53,10 @@ class Pyramid extends Shape3D{
 
     public double getArea(){
         return Pyramid.area;
+    }
+
+    public double getVolume(){
+        return Pyramid.volume;
     }
 }
 
@@ -55,8 +68,8 @@ class Sphere extends Shape3D{
 
     public Sphere(double x) {
         radius = x;
-        area = 0;
-        volume = 0;
+        area = 4.0 * Math.PI * (radius * radius);
+        volume = (4.0 / 3.0) * Math.PI * (radius * radius * radius);
     }
 
     public String getName(){
@@ -66,71 +79,8 @@ class Sphere extends Shape3D{
     public double getArea(){
         return Sphere.area;
     }
+
+    public double getVolume(){
+        return Sphere.volume;
+    }
 }
-
-
-
-/*
-    // Cube volume
-    // Pyramid volume
-    // Sphere volume
-
-    abstract double getVolume();
-
-    public static class Cube extends Shape2D{
-
-        public double surfaceArea = (Shape.length * Shape.length) * 6;
-
-        public double volume = (Shape.length * Shape.length * Shape.length);
-
-        public String getName(){
-            return "cube";
-        }
-
-        public double getArea(){
-            return surfaceArea;
-        }
-        public double getVolume(){
-            return volume;
-        }
-    }
-
-    public static class Pyramid extends Shape2D{
-
-        public double surfaceArea = 0;
-
-        public double volume = 0;
-
-        public String getName(){
-            return "pyramid";
-        }
-
-        public double getArea(){
-            return surfaceArea;
-        }
-
-        public double getVolume(){
-            return volume;
-        }
-    }
-
-    public static class Sphere extends Shape2D{
-
-        public double surfaceArea = 0;
-
-        public double volume = 0; // radius
-
-        public String getName(){
-            return "sphere";
-        }
-
-        public double getArea(){
-            return surfaceArea;
-        }
-
-        public double getVolume(){
-            return volume;
-        }
-    }
-
-*/
