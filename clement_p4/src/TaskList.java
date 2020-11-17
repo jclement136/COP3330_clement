@@ -15,16 +15,49 @@ public class TaskList {
         list = new ArrayList<>();
     }
 
-    // load current task list
-    public void load() {
+    // add an item
+    public void add(TaskItem task) {
+        list.add(task);
+    }
+
+    // remove an item
+    public void remove(int listOption) {
+        int index = listOption - 1;
+        if (list.size() <= 0)
+        {
+            throw new IndexOutOfBoundsException("cannot remove an item since list is empty");
+        }
+        else
+        {
+            list.remove(index);
+        }
     }
 
     // view current task list
+    public void view() {
+        for (int i = 0; i < list.size(); i++) {
+            TaskItem task = list.get(i);
+            System.out.println(
+                (i + 1) + "."
+                + " " + task.getTitle()
+                + " " + task.getDescription()
+                + " " + task.getDueDate()
+                + " " + task.getCompletionStatus());
+        }
+    }
+
+    // save current task list to file
     public void write(String filename) {
         try(Formatter output = new Formatter(filename)) {
             for(int i = 0; i < list.size(); i++) {
                 TaskItem task = list.get(i);
-                output.format("%s ; %s% ; %s ; %sn", task.getTitle(), task.getDescription(), task.getDueDate(), task.getCompletionStatus());
+                output.format(
+                        (i + 1) + ". "
+                        + "%s %s %s %s%n",
+                        task.getTitle(),
+                        task.getDescription(),
+                        task.getDueDate(),
+                        task.getCompletionStatus());
             }
 
         } catch (FileNotFoundException ex) {
@@ -34,29 +67,44 @@ public class TaskList {
         }
     }
 
-    // save current task list
-    public void save() {
+    // load current task list
+    public void load() {
+
     }
 
-    // add an item
-    public void add(TaskItem task) {
-        list.add(task);
+    // edit title
+    public void editTitle(int listOption, String newTitle) {
+        int index = listOption - 1;
+        TaskItem task = list.get(index);
+        task.setTitle(newTitle);
     }
 
-    // edit an item
-    public void edit(TaskItem task) {
+    // edit description
+    public void editDescription(int listOption, String newDescription) {
+        int index = listOption - 1;
+        TaskItem task = list.get(index);
+        task.setDescription(newDescription);
     }
 
-    // remove an item
-    public void remove(TaskItem task) {
+    // edit due date
+    public void editDueDate(int listOption, String newDueDate) {
+        int index = listOption - 1;
+        TaskItem task = list.get(index);
+        task.setDueDate(newDueDate);
     }
 
     // mark an item as complete
-    public void markComplete(TaskItem task) {
+    public void markComplete(int listOption) {
+        int index = listOption - 1;
+        TaskItem task = list.get(index);
+        task.setCompletionStatus("y");
     }
 
     // unmark an item as complete
-    public void unmarkComplete(TaskItem task) {
+    public void unmarkComplete(int listOption) {
+        int index = listOption - 1;
+        TaskItem task = list.get(index);
+        task.setCompletionStatus("n");
     }
 
 }

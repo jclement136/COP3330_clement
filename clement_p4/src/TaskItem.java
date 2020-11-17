@@ -1,80 +1,60 @@
+// ENCAPSULATES ITEM DATA
 public class TaskItem {
-
-    // ENCAPSULATES ITEM DATA
-
     private String title;
     private String description;
     private String dueDate;
     private String completionStatus;
 
-    // CREATE TASK ITEM
     public TaskItem(String title, String description, String dueDate, String completionStatus) {
-
-        // set title
-        if(isTitleValid(title)) {
-            this.title = title;
-        } else {
-            throw new IllegalArgumentException("invalid title entered, must be 1 or more char");
-        }
-
-        // set description
-        if(isDescriptionValid(description)) {
-            this.description = description;
-        } else {
-            throw new IllegalArgumentException("invalid description entered, must be 0 or more char");
-        }
-
-        // set due date
-        if(isDueDateValid(dueDate)) {
-            this.dueDate = dueDate;
-        } else {
-            throw new IllegalArgumentException("invalid due date entered, must formatted as YYYY-MM-DD");
-        }
-
-        // set completion status
-        if (isCompletionStatusValid(completionStatus)) {
-            this.completionStatus = completionStatus;
-        } else {
-            throw new IllegalArgumentException("invalid completion status entered, must be y or n");
-        }
-
+        setTitle(title);
+        setDescription(description);
+        setDueDate(dueDate);
+        setCompletionStatus(completionStatus);
     }
 
     // SETTERS
-    public void setTitle(String newTitle) {
-        if (isCompletionStatusValid(completionStatus)) {
-            this.title = newTitle;
-        } else {
-            throw new IllegalArgumentException("invalid completion status entered, must be y or n");
+    protected void setTitle(String title) {
+        if (isTitleValid(title))
+        {
+            this.title = title;
+        }
+        else
+        {
+            throw new InvalidTitleException ("invalid title entered, must be 1 or more characters");
+        }
+    }
+    protected void setDescription(String description) {
+        if (isDescriptionValid(description))
+        {
+            this.description = description;
+        }
+        else
+        {
+            throw new InvalidDescriptionException ("invalid description entered, must be 0 or more characters");
+        }
+    }
+    protected void setDueDate(String dueDate) {
+        if (isDueDateValid(dueDate))
+        {
+            this.dueDate = dueDate;
+        }
+        else
+        {
+            throw new InvalidDueDateException ("invalid due date entered, must be formatted as YYYY-MM-DD");
+        }
+    }
+    protected void setCompletionStatus(String completionStatus) {
+        if (isCompletionStatusValid(completionStatus))
+        {
+            this.completionStatus = completionStatus;
+        }
+        else
+        {
+            throw new InvalidCompletionStatusException ("invalid completion status entered, must be y or n");
         }
     }
 
-    public void setDescription(String newDescription) {
-        if(isDescriptionValid(newDescription)) {
-            this.description = newDescription;
-        } else {
-            throw new IllegalArgumentException("invalid description entered, must be 0 or more char");
-        }
-    }
-
-    public void setDueDate(String newDueDate) {
-        if(isDueDateValid(newDueDate)) {
-            this.dueDate = newDueDate;
-        } else {
-            throw new IllegalArgumentException("invalid due date entered, must formatted as YYYY-MM-DD");
-        }
-    }
-
-    public void setCompletionStatus(String newCompletionStatus) {
-        if (isCompletionStatusValid(newCompletionStatus)) {
-            this.completionStatus = newCompletionStatus;
-        } else {
-            throw new IllegalArgumentException("invalid completion status entered, must be y or n");
-        }
-    }
-
-
-    // GETTER FUNCTIONS
+    // GETTERS
     public String getTitle() {
         return this.title;
     }
@@ -88,23 +68,69 @@ public class TaskItem {
         return this.completionStatus;
     }
 
-
-
-    // VALIDITY CHECKERS
+    // VALIDITY
     protected boolean isTitleValid(String title) {
         return (title.length() > 0);
     }
-
     protected boolean isDescriptionValid(String description) {
-        return description.length() >= 0;
+        return (description.length() >= 0);
     }
-
     protected boolean isDueDateValid (String dueDate) {
-       return true; // make conditions to check for valid due date - YYYY-MM-DD format
-    }
+        // make conditions to check for valid due date - YYYY-MM-DD format <- gotta fix this before the due date validity checker works
+        if (dueDate.length() != 10)
+            return false;
+        else if (dueDate.charAt(4) != '-' || dueDate.charAt(7) != '-') // preliminary hyphen check
+            return false;
+        else {
+            for (int i = 0; i < 10; i++) {
 
+                // check if each char is a digit
+                if (Character.isDigit(dueDate.charAt(i))) {
+
+                    // skip past hyphens during digit check
+                    if (i == 4 || i == 7) {
+                        if (dueDate.charAt(i) == '-')
+                            continue;
+                        else
+                            return false;
+                    }
+
+                    // if we reach the end and all conditions have been met, validate
+                    if (i == 9)
+                        return true;
+
+                    // continue looping for each valid check
+                    else
+                        continue;
+                }
+            }
+        }
+        return false;
+    }
     protected boolean isCompletionStatusValid(String completionStatus) {
-        return ((completionStatus == "y") || (completionStatus == "n"));
+        return true;
     }
 
+
+    // EXCEPTIONS
+    class InvalidTitleException extends IllegalArgumentException {
+        public InvalidTitleException(String msg) {
+            super(msg);
+        }
+    }
+    class InvalidDescriptionException extends IllegalArgumentException {
+        public InvalidDescriptionException(String msg) {
+            super(msg);
+        }
+    }
+    class InvalidDueDateException extends IllegalArgumentException {
+        public InvalidDueDateException(String msg) {
+            super(msg);
+        }
+    }
+    class InvalidCompletionStatusException extends IllegalArgumentException {
+        public InvalidCompletionStatusException(String msg) {
+            super(msg);
+        }
+    }
 }
