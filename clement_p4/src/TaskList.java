@@ -1,7 +1,8 @@
+import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Formatter;
-import java.io.FileNotFoundException;
 
 // ENCAPSULATES LIST DATA
 // * Needs (protected) accessors
@@ -38,11 +39,11 @@ public class TaskList {
         for (int i = 0; i < list.size(); i++) {
             TaskItem task = list.get(i);
             System.out.println(
-                (i + 1) + "."
-                + " " + task.getTitle()
-                + " " + task.getDescription()
-                + " " + task.getDueDate()
-                + " " + task.getCompletionStatus());
+                "#" + (i + 1)
+                + " ; " + task.getTitle()
+                + " ; " + task.getDescription()
+                + " ; " + task.getDueDate()
+                + " ; " + task.getCompletionStatus());
         }
     }
 
@@ -52,8 +53,7 @@ public class TaskList {
             for(int i = 0; i < list.size(); i++) {
                 TaskItem task = list.get(i);
                 output.format(
-                        (i + 1) + ". "
-                        + "%s %s %s %s%n",
+                        "#" + (i + 1) + " ; %s ; %s ; %s ; %s%n",
                         task.getTitle(),
                         task.getDescription(),
                         task.getDueDate(),
@@ -68,9 +68,29 @@ public class TaskList {
     }
 
     // load current task list
-    public void load() {
+    public void load(File filename) throws IOException {
+        try{
 
+            FileInputStream fstream = new FileInputStream(filename);
+
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String strLine;
+
+            while ((strLine = br.readLine()) != null)   {
+                String[] splitted = strLine.split(" ; "); // here - is used as the delimiter
+            }
+
+            in.close();
+        } catch (Exception e){
+            System.err.println("An error occurred when loading the file." + e.getMessage());
+        }
     }
+
+    public int findSize() {
+        return list.size();
+    }
+
 
     // edit title
     public void editTitle(int listOption, String newTitle) {
