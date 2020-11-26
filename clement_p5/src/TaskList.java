@@ -24,6 +24,10 @@ public class TaskList {
         }
     }
 
+    public int getListSize() {
+        return list.size();
+    }
+
     public void view() {
         try {
         TaskItem task;
@@ -103,13 +107,6 @@ public class TaskList {
         }
     }
 
-    public int getListSize() {
-        return list.size();
-    }
-
-
-
-    // field editors
     public void editTitle(int listOption, String newTitle) {
         int index = listOption - 1;
         TaskItem task = list.get(index);
@@ -128,6 +125,15 @@ public class TaskList {
         task.setDueDate(newDueDate);
     }
 
+    public void editCompletionStatus(int listOption, String response) {
+        if (response.toLowerCase().startsWith("y"))
+            markComplete(listOption);
+        else if (response.toLowerCase().startsWith("n"))
+            unmarkComplete(listOption);
+        else
+            throw new IllegalArgumentException("Response must be either y/n.");
+    }
+
     public void markComplete(int listOption) {
         int index = listOption - 1;
         TaskItem task = list.get(index);
@@ -139,5 +145,4 @@ public class TaskList {
         TaskItem task = list.get(index);
         task.setCompletionStatus(false);
     }
-
 }
