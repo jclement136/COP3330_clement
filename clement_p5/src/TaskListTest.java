@@ -1,15 +1,11 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Formatter;
-import java.io.FileNotFoundException;
 
 public class TaskListTest {
 
-// ADD AND REMOVE
+    // ADD AND REMOVE
     @Test
     public void addingTaskItemsIncreasesSize() {
         TaskItem task = new TaskItem("title", "description", "2021-01-01", false);
@@ -38,7 +34,7 @@ public class TaskListTest {
         assertThrows(IndexOutOfBoundsException.class, () -> list.remove(0));
     }
 
-// FILE MANAGEMENT
+    // FILE MANAGEMENT
     @Test
     public void viewTaskItems() {
         TaskItem task = new TaskItem("title", "description", "2021-01-01", false);
@@ -69,14 +65,12 @@ public class TaskListTest {
         System.out.println("Loading saved file...");
         list.load("output.txt");
         System.out.println("File loaded. Viewing loaded file...");
-
         list.view();
 
-
-        assertDoesNotThrow(() -> list.getListSize());
+        assertEquals(list.getListSize(), 2);
     }
 
-// GETTING DATA
+    // GETTING DATA
     @Test
     public void gettingTaskItemTitleSucceedsWithValidIndex() {
         TaskItem task = new TaskItem("title", "description", "2021-01-01", false);

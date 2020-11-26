@@ -14,11 +14,13 @@ public class App {
 
     private static void processAppMenuOption(String response) {
         if (response.equals("1")) {
-            TaskApp application = new TaskApp();
-            application.taskListMainMenu();
+            TaskApp taskApplication = new TaskApp();
+            taskApplication.taskListMainMenu();
         }
         else if (response.equals("2")) {
-            ;
+            // ContactApp contactApplication = new ContactApp();
+            // contactApplication.contactListMainMenu();
+            System.out.println("Contact list coming soon.");
         }
         else if (response.equals("3"))
             System.exit(0);
@@ -35,5 +37,4 @@ public class App {
             processAppMenuOption(response);
         }
     }
-
 }
