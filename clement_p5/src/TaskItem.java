@@ -1,18 +1,12 @@
-import java.time.LocalDate;
-
 public class TaskItem {
     private String title;
     private String description;
     private String dueDate;
     private boolean completed;
 
-    public TaskItem(String title, String description, String dueDate, boolean completionStatus) {
+    public TaskItem(String title, String description, String dueDate, boolean completed) {
         if (title.isBlank())
             throw new InvalidTitleException("A task title must be at least 1 character long.");
-
-        LocalDate date;
-        try { date = LocalDate.parse(dueDate); }
-        catch (java.time.format.DateTimeParseException e) { throw new InvalidDueDateException("Invalid due date. Task not updated."); }
 
         setTitle(title);
         setDescription(description);

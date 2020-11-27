@@ -53,7 +53,6 @@ public class ContactApp {
                 }
                 break;
             case "3":
-                ;
                 break;
             default:
                 System.out.println("Please enter a valid list option.");
@@ -112,7 +111,6 @@ public class ContactApp {
                     list.save("contacts.txt");
                 break;
             case "6":
-                ;
                 break;
             default:
                 System.out.println("Please enter a valid list option.");
@@ -176,7 +174,6 @@ public class ContactApp {
 
 
     private void processContactEdit() {
-        int size = list.getListSize();
         String response;
         list.view();
 
@@ -219,7 +216,6 @@ public class ContactApp {
     }
 
     private void processContactRemove() {
-        int size = list.getListSize();
         String response;
         list.view();
 

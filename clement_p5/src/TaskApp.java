@@ -29,32 +29,35 @@ public class TaskApp {
     }
 
     private void processMainMenuOption(String response) {
-        if (response.equals("1")) {
-            list = new TaskList();
-            System.out.println("New task list created.");
-            taskMenu();
-        }
-        else if (response.equals("2")) {
-            while (true) {
-                try {
-                    Scanner input = new Scanner(Paths.get("tasks.txt"));
-                    list.load("tasks.txt");
-                    System.out.println("Task list loaded.");
-                    taskMenu();
-                    break;
-                } catch (NoSuchFileException ex) {
-                    System.out.println("No task list saved yet. Please create a new task list.");
-                    break;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    break;
+        switch (response) {
+            case "1":
+                list = new TaskList();
+                System.out.println("New task list created.");
+                taskMenu();
+                break;
+            case "2":
+                while (true) {
+                    try {
+                        Scanner input = new Scanner(Paths.get("tasks.txt"));
+                        list.load("tasks.txt");
+                        System.out.println("Task list loaded.");
+                        taskMenu();
+                        break;
+                    } catch (NoSuchFileException ex) {
+                        System.out.println("No task list saved yet. Please create a new task list.");
+                        break;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        break;
+                    }
                 }
-            }
+                break;
+            case "3":
+                break;
+            default:
+                System.out.println("Please enter a valid list option.");
+                break;
         }
-        else if (response.equals("3"))
-            ;
-        else
-            System.out.println("Please enter a valid list option.");
     }
 
     private void taskMenu() {
@@ -79,37 +82,40 @@ public class TaskApp {
     }
 
     private void processTaskMenuOption(String response) {
-        if (response.equals("1")) {
-            if (list.getListSize() == 0)
-                System.out.println("There are no items in the list to view. Please add one first. Returning to task menu...");
-            else
-                list.view();
+        switch (response) {
+            case "1":
+                if (list.getListSize() == 0)
+                    System.out.println("There are no items in the list to view. Please add one first. Returning to task menu...");
+                else
+                    list.view();
+                break;
+            case "2":
+                processTaskAdd();
+                break;
+            case "3":
+                if (list.getListSize() == 0)
+                    System.out.println("There are no items in the list to edit. Please add one first. Returning to main menu...");
+                else
+                    processTaskEdit();
+                break;
+            case "4":
+                if (list.getListSize() == 0)
+                    System.out.println("There are no items in the list to remove. Please add one first. Returning to main menu...");
+                else
+                    processTaskRemove();
+                break;
+            case "5":
+                if (list.getListSize() == 0)
+                    System.out.println("There are no items in the list to save. Please add one first. Returning to main menu...");
+                else
+                    list.save("tasks.txt");
+                break;
+            case "6":
+                break;
+            default:
+                System.out.println("Please enter a valid list option.");
+                break;
         }
-        else if (response.equals("2")) {
-            processTaskAdd();
-        }
-        else if (response.equals("3")) {
-            if (list.getListSize() == 0)
-                System.out.println("There are no items in the list to edit. Please add one first. Returning to main menu...");
-            else
-                processTaskEdit();
-        }
-        else if (response.equals("4")) {
-            if (list.getListSize() == 0)
-                System.out.println("There are no items in the list to remove. Please add one first. Returning to main menu...");
-            else
-                processTaskRemove();
-        }
-        else if (response.equals("5")) {
-            if (list.getListSize() == 0)
-                System.out.println("There are no items in the list to save. Please add one first. Returning to main menu...");
-            else
-                list.save("tasks.txt");
-        }
-        else if (response.equals("6"))
-            ;
-        else
-            System.out.println("Please enter a valid list option.");
     }
 
     private void processTaskAdd() {
@@ -123,7 +129,7 @@ public class TaskApp {
         String title = getTaskTitle();
         String description = getTaskDescription();
         String dueDate = getTaskDueDate();
-        Boolean complete = getTaskCompletionStatus();
+        boolean complete = getTaskCompletionStatus();
 
         TaskItem task = new TaskItem(title, description, dueDate, complete);
 
@@ -173,7 +179,6 @@ public class TaskApp {
     }
 
     private void processTaskEdit() {
-        int size = list.getListSize();
         String response;
         list.view();
 
@@ -216,7 +221,6 @@ public class TaskApp {
     }
 
     private void processTaskRemove() {
-        int size = list.getListSize();
         String response;
         list.view();
 
