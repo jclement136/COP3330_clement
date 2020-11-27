@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class TaskApp {
@@ -32,9 +35,21 @@ public class TaskApp {
             taskMenu();
         }
         else if (response.equals("2")) {
-            list.load("output.txt");
-            System.out.println("Task list loaded.");
-            taskMenu();
+            while (true) {
+                try {
+                    Scanner input = new Scanner(Paths.get("tasks.txt"));
+                    list.load("tasks.txt");
+                    System.out.println("Task list loaded.");
+                    taskMenu();
+                    break;
+                } catch (NoSuchFileException ex) {
+                    System.out.println("No task list saved yet. Please create a new task list.");
+                    break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    break;
+                }
+            }
         }
         else if (response.equals("3"))
             ;
@@ -66,7 +81,7 @@ public class TaskApp {
     private void processTaskMenuOption(String response) {
         if (response.equals("1")) {
             if (list.getListSize() == 0)
-                System.out.println("There are no items in the list to view. Please add one first. Returning to main menu...");
+                System.out.println("There are no items in the list to view. Please add one first. Returning to task menu...");
             else
                 list.view();
         }
@@ -89,7 +104,7 @@ public class TaskApp {
             if (list.getListSize() == 0)
                 System.out.println("There are no items in the list to save. Please add one first. Returning to main menu...");
             else
-                list.save("output.txt");
+                list.save("tasks.txt");
         }
         else if (response.equals("6"))
             ;
@@ -176,7 +191,6 @@ public class TaskApp {
     }
 
     private void editTaskData(int listOption) {
-
         String revision;
 
         System.out.println("Type your new task title.");
@@ -219,4 +233,3 @@ public class TaskApp {
         }
     }
 }
-

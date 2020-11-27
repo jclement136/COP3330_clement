@@ -34,7 +34,7 @@ public class TaskList {
         System.out.format("Tasks%n%n");
         for (int i = 0; i < list.size(); i++) {
              task = list.get(i);
-            System.out.format("[%d]%n", i + 1);
+            System.out.format("[%d] ", i + 1);
             System.out.println(task.getTitle());
             System.out.println(task.getDescription());
             System.out.println(task.getDueDate());
@@ -52,7 +52,6 @@ public class TaskList {
 
     public void save(String filename) {
         try(Formatter output = new Formatter(filename)) {
-
             output.format("Tasks%n");
             for(TaskItem task : list) {
                 output.format("%s%n", task.getTitle());
@@ -63,7 +62,6 @@ public class TaskList {
                 else
                     output.format("Incomplete%n");
             }
-
         } catch (FileNotFoundException ex) {
             System.out.println("Unable to find the file...");
         } catch (Exception ex) {

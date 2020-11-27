@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-
 public class ContactItem {
     private String firstName;
     private String lastName;

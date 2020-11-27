@@ -18,9 +18,8 @@ public class App {
             taskApplication.taskListMainMenu();
         }
         else if (response.equals("2")) {
-            // ContactApp contactApplication = new ContactApp();
-            // contactApplication.contactListMainMenu();
-            System.out.println("Contact list coming soon.");
+            ContactApp contactApplication = new ContactApp();
+            contactApplication.contactListMainMenu();
         }
         else if (response.equals("3"))
             System.exit(0);
