@@ -12,19 +12,19 @@ public class App {
         System.out.println("3) quit");
     }
 
-    private static void processAppMenuOption(String response) {
-        if (response.equals("1")) {
-            TaskApp taskApplication = new TaskApp();
-            taskApplication.taskListMainMenu();
+    private static void processAppMenuOption(String response) { // ARROW ELIMINATES NEED FOR BREAK STATEMENTS
+        switch (response) {
+            case "1" -> {
+                TaskApp taskApplication = new TaskApp();
+                taskApplication.taskListMainMenu();
+            }
+            case "2" -> {
+                ContactApp contactApplication = new ContactApp();
+                contactApplication.contactListMainMenu();
+            }
+            case "3" -> System.exit(0);
+            default -> System.out.println("Please enter a valid list option.");
         }
-        else if (response.equals("2")) {
-            ContactApp contactApplication = new ContactApp();
-            contactApplication.contactListMainMenu();
-        }
-        else if (response.equals("3"))
-            System.exit(0);
-        else
-            System.out.println("Please enter a valid list option.");
     }
 
     public static void main(String[] args) {
